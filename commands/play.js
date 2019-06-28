@@ -11,7 +11,7 @@ module.exports = {
         let voiceChannel = message.member.voiceChannel;
         let searchTerms = message.content.replace('.play ', '');
 
-        if(!voiceChannel) return message.reply('Tienes que estar en un canal de voz para reproducir música.');
+        if(!voiceChannel) return message.reply('tienes que estar en un canal de voz para reproducir música.');
         this.playByName(message, searchTerms, serverQueue, voiceChannel);       
 
     },

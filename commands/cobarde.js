@@ -13,10 +13,6 @@ module.exports = {
                 bitrate: 5000
             });
         }).catch(console.error);
-
-        /*onst broadcast = client.createVoiceBroadcast().playFile('/mp3/cobarde.mp3');
-        const dispatcher = voiceConnection.playBroadcast(broadcast);*/
-        
     }
     
 
