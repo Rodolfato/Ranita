@@ -12,8 +12,8 @@ Bot para servidores de Discord, llamado Ranita.
 | .cobarde | Reproduce el archivo .mp3 llamado cobarde. |
 
 ### Referencias
-[Documentación de Discord.js](https://discord.js.org/#/)
-[How to create a music bot using Discord.js](https://gabrieltanner.org/blog/dicord-music-bot)
+[Documentación de Discord.js](https://discord.js.org/#/)  
+[How to create a music bot using Discord.js](https://gabrieltanner.org/blog/dicord-music-bot)  
 
 
 
