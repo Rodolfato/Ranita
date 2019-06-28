@@ -10,6 +10,9 @@ Bot para servidores de Discord, llamado Ranita.
 | .leave | El bot se va del canal de voz donde se encontraba. |
 | .roll | Entrega un número aleatorio entre 1 y un número entregado como argumento. |
 | .cobarde | Reproduce el archivo .mp3 llamado cobarde. |
+| .8ball | Hacer una pregunta a la bola mágica. |
+| .help | Lista la información de uno o todos los comandos disponibles. |
+| .imgsearch | Busca una imagen en la web según terminos entregados |
 
 ### Referencias
 [Documentación de Discord.js](https://discord.js.org/#/)  

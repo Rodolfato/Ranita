@@ -35,7 +35,7 @@ async function handler(message){
         command.executioner(message, args, client);
     } catch(error){
         console.log(error);
-        message.reply('Error al ejecutar el comando');
+        message.reply('error al ejecutar el comando.');
     }
 }
 
