@@ -1,6 +1,6 @@
 const YTDL = require('ytdl-core');
 const YouTube = require('simple-youtube-api');
-const youtube = new YouTube('AIzaSyA8wYU4vCu4StD02IXIvggdze9dAhE_fUo');
+const youtube = new YouTube('');
 
 module.exports = {
     name: 'play',
