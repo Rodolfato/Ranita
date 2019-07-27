@@ -1,6 +1,7 @@
 const YTDL = require('ytdl-core');
+const YTDLD = require('ytdl-core-discord')
 const YouTube = require('simple-youtube-api');
-const youtube = new YouTube('AIzaSyA8wYU4vCu4StD02IXIvggdze9dAhE_fUo');
+const youtube = new YouTube('');
 
 module.exports = {
     name: 'play',
@@ -17,18 +18,23 @@ module.exports = {
     },
 
     async playByName(message, songName, serverQueue, voiceChannel){
-        let videos = await youtube.searchVideos(songName, 1);
-        let video = await youtube.getVideoByID(videos[0].id);
+        try{
+            var videos = await youtube.searchVideos(songName, 1);
+        }catch(error){   
+           console.log(error);
+        }
+        var video = await youtube.getVideoByID(videos[0].id);
         this.playByURL(message, `https://www.youtube.com/watch?v=${video.id}`, serverQueue, voiceChannel);
         console.log(video);
     },
 
     async playByURL(message, songURL, serverQueue, voiceChannel){
-
         let songInfo = await YTDL.getInfo(songURL);
         let song = {
             title: songInfo.title,
             url: songInfo.video_url,
+            duration: parseInt(songInfo.length_seconds, 10),
+            requester: message.member.user.username
         };
 
         if(!serverQueue){
@@ -37,7 +43,8 @@ module.exports = {
                 voiceChannel: voiceChannel,
                 connection: null,
                 songs: [],
-                playing: true
+                playing: true,
+                dispatcher: null
             };
 
             queue.set(message.guild.id, queueConstruction);
@@ -56,31 +63,29 @@ module.exports = {
         }
         else{
             serverQueue.songs.push(song);
-            return message.channel.send(`"${song.title}" fue añadida a la lista de reproducción.`);
+            return message.channel.send('```' + song.title + ' fue añadida a la lista de reproducción.```');
         }
-
     },
 
-    play(message, song){
-        let serverQueue = queue.get(message.guild.id);
-
+    async play(message, song){
+        let serverQueue = queue.get(message.guild.id);        
         if(!song){
-            serverQueue.voiceChannel.leave();
             queue.delete(message.guild.id);
             return;
         }
-        message.channel.send('Ahora suena ' + '"' + song.title + '".');
-        const dispatcher = serverQueue.connection.playStream(YTDL(song.url))
+        message.channel.send('```Ahora suena ' + '🎵 ' + song.title + ' 🎵' + ' pedida por: ' + song.requester + '.```');
+        console.log(song);
+        const dispatcher = serverQueue.connection.playOpusStream(await YTDLD(song.url, { filter: 'audioonly' }));
+        serverQueue.dispatcher = dispatcher;
+        dispatcher
             .on('end',() => {
-                console.log('La canción terminó.');
+                console.log('La canción ' + song.title + ' terminó.');
                 serverQueue.songs.shift();
-                message.channel.send('"' + song.title + '"' + ' terminó.');
                 this.play(message, serverQueue.songs[0]);
             })
             .on('error', error => {
                 console.error(error);
-            });
-            
+            });          
     }
 
 }

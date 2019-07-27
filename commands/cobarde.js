@@ -7,12 +7,14 @@ module.exports = {
         if (!voiceChannel) return message.reply('Tienes que estar en un canal de voz para reproducir.');
         voiceChannel.join()
         .then(connection => {
-            const dispatcher = connection.playFile('D:/Estudio/Amateur/Discord/Bots/Ranita/mp3/cobarde.mp3', {
+            const dispatcher = connection.playFile('./mp3/cobAAAAARDE ogg.ogg', {
                 passes: 10,
                 volume: 1.5,
-                bitrate: 5000
+                bitrate: 1250
             });
         }).catch(console.error);
+
+        
     }
     
 

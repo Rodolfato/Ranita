@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const CfgFile = require('./config');
 
 global.queue = new Map();
+global.ytList = new Map();
 
 const client = new Discord.Client();
 const commands = new Discord.Collection();

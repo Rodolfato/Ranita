@@ -5,7 +5,8 @@ module.exports = {
     name: 'imgsearch',
     description: 'Busca una imagen en el internet, utilizando el portal dogpile.',
 
-    executioner(message, args, client){
+    executioner(message, args, client)
+    {
         let searchTerms = message.content.replace('.imgsearch ', '');
         let options = {
             url: 'http://results.dogpile.com/serp?qc=images&q=' + searchTerms,
